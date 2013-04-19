@@ -1,0 +1,157 @@
+@grey: #464646;
+@grey_lite: #ebebeb;
+@grey_med: #989898;
+@grey_dark: #4b4b4a;
+
+@import "_style.less";
+
+body {
+	text-align: center;
+}
+.overlay(){
+	background: #fff url('../img/loading.gif') no-repeat 50% 50%;
+
+	display: none;
+	position: fixed;
+
+	width: auto;
+	height: auto;
+
+	.close, .refresh {
+		text-align: right;
+		z-index: 2000;
+
+		button {
+			background-color: @grey_med;
+			border: 3px solid @grey_lite;
+			.box-shadow(none);
+			color: @grey_lite;
+			cursor: pointer;
+			font-weight: 700;
+			.gradient(@grey_med, @grey_med, @grey_med);
+			outline: none;
+			margin: -20px -15px 0 0;
+			padding: 3px 8px;
+
+			min-width: 0;
+			.rounded(500px);
+			z-index: 5000;
+		}
+	}
+	.header {
+		padding-bottom: 5px;
+
+		h3 {
+			color: lighten(@grey, 18%);
+			font-size: 30px;
+			text-transform: none;
+		}
+	}
+	.body {}
+	.footer {
+		padding: 22px 0 5px;
+
+		a.button {
+			padding: 5px 60px;
+		}
+		.action {
+			text-align: center;
+
+			button, a.button {
+				margin: 0 5px;
+				padding: 5px 10px;
+				min-width: 0;
+			}
+		}
+	}
+}
+
+#overlay {
+	border: 3px solid @grey_lite;
+	//.box-shadow(0 0 30px 0px #fff);
+	padding: 25px;
+	left: 50%;
+	top: 0;
+	z-index: 1001;
+	.overlay();
+}
+
+#overlay_holder {
+	overflow: hidden;
+
+	padding: 0;
+	margin: 0;
+
+	left: 0;
+	top: 0;
+
+	z-index: 1000;
+
+	.overlay();
+}
+
+#overlay_reference {
+	display: none;
+}
+
+#blackout {
+	background-image: url('../img/overlay---bg.png');
+	color: #fff;
+	display: none;
+
+	height: 100%;
+	width: 100%;
+
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+
+	z-index: 999;
+}
+
+
+// Progress Bar
+
+.progress {
+	background-color: @grey_lite;
+	color: @grey_dark;
+	padding: 5px 5px 5px 15px;
+	width: 380px;
+	height: 20px;
+	position: relative;
+
+	&.started {
+		color: #fff;
+	}
+	.bar {
+		background: #dd5901 url('../img/progress---orange.png');
+		height: 30px;
+		width: 0px;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		z-index: 0;
+	}
+	span {
+		display: block;
+		position: absolute;
+		top: 6px;
+		z-index: 100;
+	}
+
+	// Alt
+	&.beige {
+		background: #f8f3e3 url('../img/progress---beige.png');
+		float: left;
+		height: 33px;
+		width: 460px;
+		padding: 0;
+		margin: 0;
+
+		.bar {
+			background: #cb4f00 url('../img/progress---orange-solid.png');
+			height: 33px;
+		}
+	}
+}

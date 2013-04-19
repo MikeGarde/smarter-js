@@ -1,0 +1,36 @@
+// Lets pick some colors
+// I suggest checking out http://colorschemedesigner.com/
+@primary: #1B374C;
+@primary_L1: darken(saturate(spin(@primary, 1), 0.60416666666667), 1.2%);
+@primary_L2: darken(saturate(@primary, 0.72916666666667), 1.35%);
+@primary_R1: darken(saturate(spin(@primary, 1), 0.625), 2%);
+@primary_R2: darken(saturate(spin(@primary, 1), 0.52083333333333), 2.1%);
+
+@complementary: darken(saturate(spin(@primary, -60), 1.0416666666667), 1.1%);
+@complementary_L1: darken(saturate(spin(@primary, -60), 0.6875), 1.3%);
+@complementary_L2: darken(saturate(spin(@primary, -60), 0.8125), 1.45%);
+@complementary_R1: darken(saturate(spin(@primary, -60), 0.6875), 2.05%);
+@complementary_R2: darken(saturate(spin(@primary, -59), 0.58333333333333), 2.15%);
+
+@secondaryA: darken(saturate(spin(@primary, -60), 1.0416666666667), 1.1%);
+@secondaryA_L1: darken(saturate(spin(@primary, -194), 0.66666666666667), 1.85%);
+@secondaryA_L2: darken(saturate(spin(@primary, -194), 0.8125), 2%);
+@secondaryA_R1: darken(saturate(spin(@primary, -193), 0.6875), 2.55%);
+@secondaryA_R2: darken(saturate(spin(@primary, -194), 0.64583333333333), 2.65%);
+
+@secondaryB: darken(saturate(spin(@primary, -194), 1.0416666666667), 1.55%);
+@secondaryB_L1: darken(saturate(spin(@primary, -172), 0.66666666666667), 1.85%);
+@secondaryB_L2: darken(saturate(spin(@primary, -171), 0.8125), 2%);
+@secondaryB_R1: darken(saturate(spin(@primary, -172), 0.6875), 2.55%);
+@secondaryB_R2: darken(saturate(spin(@primary, -172), 0.64583333333333), 2.65%);
+
+
+// This example requires Google Web Fonts
+// <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono|Molle:400italic|Roboto:400,300' rel='stylesheet' type='text/css' />
+.font-serif() { font-family: 'Molle', Georgia, 'Times New Roman', Times, Arial, Helvetica, sans-serif; }
+.font-sans()  { font-family: 'Roboto', Arial, Helvetica, Verdana, sans-serif; }
+.font-mono()  { font-family: 'Ubuntu Mono', Consolas, Monaco, Lucida Console, Courier New, monospace; }
+
+
+// Standard Spacing
+@textMargin: 20px;

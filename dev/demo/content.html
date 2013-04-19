@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Smarter-JS On Page Content Demo</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js" type="text/javascript"></script>
+	<!--<script src="//smarter-js.googlecode.com/git/v1/js/debug.js" type="text/javascript"></script>-->
+	<script src="../js/debug.js" type="text/javascript"></script>
+
+	<!--
+	<link rel="stylesheet" type="text/css" href="../css/site.css" />
+	<link rel="stylesheet" type="text/css" href="../css/debug.css" />
+	-->
+
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono|Molle:400italic|Roboto:400,300' rel='stylesheet' type='text/css' />
+	<link rel="stylesheet/less" type="text/css" href="../css/content.less" />
+	<!--<script type="text/javascript" src="//smarter-js.googlecode.com/git/v1/js/less.js"></script>-->
+	<script type="text/javascript" src="../js/less.js"></script>
+	<script type="text/javascript">
+		less.env = "development";
+		less.watch();
+	</script>
+
+	<script type="text/javascript" src="../js/content-initiate.js"></script>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+<div class="wrapper ajax_targetable">
+
+	<h1>Smarter-JS On Page Content Demo</h1>
+
+	<h2>Popups</h2>
+
+	<h3>Videos</h3>
+	<ul>
+		<li><a href="http://www.youtube.com/watch?v=N-i9GXbptog" class="popup">YouTube (Long URL)</a></li>
+		<li><a href="http://youtu.be/kQFKtI6gn9Y" class="popup">YouTube (Short URL)</a></li>
+		<li><a href="http://vimeo.com/23737564" class="popup">Vimeo</a></li>
+	</ul>
+
+	<h3>AJAX</h3>
+	<ul>
+		<li><a href="http://10.1.10.23/smarter-js/v1/demo/content-response-ajax.html" class="popup" data-width="500" data-height="300" data-title="Login">Sign In</a></li>
+	</ul>
+
+
+	<h2>On Page Content</h2>
+	<ul>
+		<li>Update Div</li>
+	</ul>
+
+	<div class="outline" data-target="target_me">I am the original content.</div>
+
+
+	<h2>Progress Bar</h2>
+	<div class="progress started" data-target="progress-item-1">
+		<div class="bar" data-start="5" data-complete="80"></div>
+		<span>Progress</span>
+	</div>
+	<div class="progress started live" data-target="progress-item-2">
+		<div class="bar" data-start="5" data-complete="40"></div>
+		<span>Progress</span>
+	</div>
+	<div class="progress started live" data-target="progress-item-2">
+		<div class="bar" data-start="5" data-complete="20"></div>
+		<span>Progress</span>
+	</div>
+
+
+	
+
+	<!-- Modal - Overlay -->
+	<div id="overlay"></div>
+
+	<!-- Modal - overlay holder -->
+	<div id="overlay_holder"></div>
+
+</div><!-- /.ajax_targetable -->
+
+<!-- Modal - overlay reference -->
+<div id="overlay_reference">
+	<div class="close"><button>×</button></div>
+	<div class="header"><h3 data-target="popup-title"></h3></div>
+	<div class="body" data-target="popup"></div>
+	<div class="footer" data-target="popup-footer"><a href="#{link}" class="button">{action}</a></div>
+</div>
+
+<!-- Modal - blackout -->
+<div id="blackout" class="close"></div>
+
+</body>
+</html>

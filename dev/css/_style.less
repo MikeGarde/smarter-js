@@ -1,0 +1,139 @@
+@import "1_elements.less";
+@import "2_variables.less";
+@import "3_reset.less";
+
+body {
+	.font-serif();
+}
+
+h1, h2, h3, h4 {
+	color: @primary;
+	.font-sans();
+	margin-bottom: @textMargin * 1.5;
+}
+h1 { font-size: 32px; line-height: 36px; font-weight: 400; }
+h2 { font-size: 20px; line-height: 28px; font-weight: 400; }
+h3 { font-size: 25px; line-height: 36px; font-weight: 400; color: @secondaryA; }
+h4 { font-size: 18px; line-height: 26px; font-weight: 400; color: @secondaryA; }
+h5 { font-size: 16px; line-height: 24px; font-weight: 400; }
+h6 { font-size: 13px; line-height: 19px; font-weight: 400; }
+p  { font-size: 12px; line-height: 20px; font-weight: 400; color: @secondaryB; margin-bottom: 20px; }
+li { font-size: 12px; line-height: 20px; font-weight: 400; color: @secondaryB; }
+
+a {
+	color: @complementary;
+	.font-serif();
+	font-weight: 700;
+	text-decoration: none;
+	text-transform: uppercase;
+
+	&:visited {
+		color: #898989;
+	}
+	&:hover {
+		color: @secondaryA;
+	}
+}
+.button() {
+	//background: @orange url('../img/bg---gradient-button.png') repeat-x left bottom;
+	border: none;
+	color: #fff;
+	.font-sans();
+	font-size: 12px;
+	padding: 8px 10px;
+	width: auto;
+	.rounded(1px);
+	text-transform: uppercase;
+
+	&:hover {
+		color: #fff568;
+	}
+}
+a.button, input.button {
+	.button();
+}
+code, pre {
+	background-color: #fff;
+	border: 1px solid @complementary;
+	display: block;
+	margin: 0 0 @textMargin;
+	padding: 10px;
+
+	ol {
+		margin-left: 30px;
+	}
+}
+form {
+	margin: 0 0 @textMargin;
+}
+
+
+.css-classA, .css-classB {
+	display: inline-block;
+	width: 49.5%;
+	height: 50px;
+}
+.css-classA {
+	float: left;
+	margin-right: 1%;
+}
+
+div.color_group {
+	clear: both;
+	position: relative;
+
+	.tl, .bl, .tr, .br {
+		display: inline-block;
+		width: 100px;
+		height: 100px;
+		position: absolute;
+	}
+	.tl, .bl {
+		left: 0;
+	}
+	.bl, .br { margin-top: 100px; }
+	.main {
+		height: 200px;
+		width: 790px;
+		margin: 0 105px;
+	}
+	.tr, .br {
+		right: 0;
+	}
+	.tr {}
+	.br {}
+
+	&.primary {
+
+		.main { background-color: @primary; }
+		.tl { background-color: @primary_L1; }
+		.bl { background-color: @primary_L2; }
+		.tr { background-color: @primary_R1; }
+		.br { background-color: @primary_R2; }
+	}
+	&.complementary {
+
+		.main { background-color: @complementary; }
+		.tl { background-color: @complementary_L1; }
+		.bl { background-color: @complementary_L2; }
+		.tr { background-color: @complementary_R1; }
+		.br { background-color: @complementary_R2; }
+	}
+	&.secondaryA {
+
+		.main { background-color: @secondaryA; }
+		.tl { background-color: @secondaryA_L1; }
+		.bl { background-color: @secondaryA_L2; }
+		.tr { background-color: @secondaryA_R1; }
+		.br { background-color: @secondaryA_R2; }
+	}
+	&.secondaryB {
+
+		.main { background-color: @secondaryB; }
+		.tl { background-color: @secondaryB_L1; }
+		.bl { background-color: @secondaryB_L2; }
+		.tr { background-color: @secondaryB_R1; }
+		.br { background-color: @secondaryB_R2; }
+	}
+
+}

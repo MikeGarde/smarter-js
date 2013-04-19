@@ -1,0 +1,61 @@
+@grey: #464646;
+@grey_lite: #ebebeb;
+@grey_med: #989898;
+@grey_dark: #4b4b4a;
+
+@import "_style.less";
+
+body {
+	text-align: left;
+}
+
+.smarter-scroll {
+	overflow: hidden;
+	position: relative;
+
+	.viewport {
+		position: relative;
+
+		.fullview {
+			width: 100%;
+			position: relative;
+				right: 0;
+				left: 0;
+		}
+		.scrollbar {
+			position: absolute;
+				top: 0;
+				right: 10px;
+				bottom: 0;
+			width: 10px;
+			z-index: 999;
+
+			.track {
+				background-color: #000;
+				cursor: default;
+				position: relative;
+					right: 0;
+					left: 0;
+				height: 180px;
+				.opacity(0.025);
+				.rounded(5px);
+				z-index: 1000;
+			}
+		}
+	}
+}
+body.smarter-scroll {
+
+	.viewport {
+		position: fixed;
+			top: 0;
+			bottom: 0;
+	}
+
+	.smarter-scroll {
+
+		.viewport {
+			position: relative;
+		}
+	}
+}
