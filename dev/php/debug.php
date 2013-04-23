@@ -17,11 +17,11 @@ function print_a($array, $die=true, $return=false) {
 		$array = $GLOBALS;
 	}
 
-	$array = object_to_array($array);
+	//$array = object_to_array($array);
 	$array = print_r($array, true);
 	$array = preg_replace('/\[(.*[a-zA-Z]{1}.*)\] => /i', '[\'$1\'] => ', $array);
-	$array = preg_replace('/ => (.*[a-zA-Z!@#$%\^&\*:]{1}.*)\n/i', " => '$1'\n", $array);
-	$array = preg_replace('/ => \'Array\'/i', " => Array", $array);
+	$array = preg_replace_callback('/ => (.*[a-zA-Z!@#$%\^&\*:]{1}.*)\n/i',	"addslashes_2_regex", $array);
+	$array = preg_replace('/ => \'(Array|stdClass Object)\'/i', " => $1", $array);
 	$array = htmlspecialchars($array);
 	$array = str_replace(array('    ', "\t"), '&nbsp;&nbsp;&nbsp;&nbsp;', $array);
 
@@ -45,6 +45,16 @@ function print_a($array, $die=true, $return=false) {
 
 	if ($die)
 		die();
+}
+
+
+/**
+ * Called by preg_replace_callback
+ *
+ * @param array  $matches
+ */
+function addslashes_2_regex($matches){
+	return ' => \''.addslashes($matches[1])."'\n";
 }
 
 
