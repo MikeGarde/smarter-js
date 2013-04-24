@@ -1,4 +1,6 @@
-
+//
+// Setup Shared Values
+//
 var sso = { };
 function setup_sso() {
 	sso = {
@@ -68,6 +70,10 @@ function update_sso() {
 	console.log(sso);
 }
 
+
+//
+// Setup Pages
+//
 function make_page_active() {
 
 	if(sso.axis)
@@ -96,13 +102,11 @@ function make_page_active() {
 		location.hash = '';
 	
 	sso.flip_to = null;
-	sso.viewport.position = parseInt( $('.ss-page.ss-active').css('top') );
+	sso.fullview.position = parseInt( $('.ss-page.ss-active').css('top') );
 	
 	console.log(sso);
 }
 
-
-// Setup Pages
 function initiate_pages() {
 	var pos_left = sso.viewport.width * -1;
 	$('.ss-page').each(function(index){
@@ -125,7 +129,8 @@ function initiate_pages() {
 		console.log('hash set, need to move user');
 		//flip_to(location.hash, 800)
 	}
-	sso.viewport.position = parseInt( $('.ss-page.ss-active').css('top') );
+	sso.fullview.position = parseInt( $('.ss-page.ss-active').css('top') );
+	track_update();
 	console.log(sso);
 }
 
@@ -133,6 +138,10 @@ function update_pages() {
 
 }
 
+
+//
+// Horizontal Actions
+//
 function flip_to(hash, delay) {
 	console.log('flipp_to running');
 
@@ -246,6 +255,38 @@ function flip_action(new_pos, time, delay) {
 	});
 }
 
+
+
+//
+// Scroll Bar Functions
+//
+function track_height(inner, outer) {
+	var r = inner / outer;
+	if(r < 0.05)
+		r = 0.05;
+	return r * inner;
+}
+function track_fade(element, amount) {
+	if( !element.children('.track').hasClass('dragging') ){
+		element.children('.track').stop().animate({
+			opacity: amount
+		}, 400, 'easeInOutExpo', function() {
+
+		});
+	}
+}
+function track_update() {
+
+	var page_visable = sso.viewport.height / sso.fullview.height;
+	var track_height = sso.viewport.height * page_visable;
+	var track_pos = ((sso.fullview.position * -1) / sso.fullview.height) * sso.viewport.height;
+console.log('track_pos: ' + track_pos);
+	$('.track').delay(400).animate({
+		height: track_height,
+		opacity: 0.025,
+		top: track_pos
+	}, 1300, 'easeInOutExpo');
+}
 
 
 //
@@ -364,24 +405,6 @@ $(function() {
 
 
 	//
-	// Scroll Bar Functions
-	//
-	function track_height(inner, outer) {
-		var r = inner / outer;
-		if(r < 0.05)
-			r = 0.05;
-		return r * inner;
-	}
-	function track_fade(element, amount) {
-		if( !element.children('.track').hasClass('dragging') ){
-			element.children('.track').stop().animate({
-				opacity: amount
-			}, 400, 'easeInOutExpo', function() {
-
-			});
-		}
-	}
-	//
 	// Scroll Bar Actions
 	//
 	if( !touchEvents ) {
@@ -399,9 +422,9 @@ $(function() {
 
 			// Which direction?
 			if(e.originalEvent.wheelDelta >= 0) {
-				new_pos = sso.viewport.position + sso.yScroll;
+				new_pos = sso.fullview.position + sso.yScroll;
 			} else{
-				new_pos = sso.viewport.position - sso.yScroll;
+				new_pos = sso.fullview.position - sso.yScroll;
 			}
 
 			// Are we close to the top or bottom?
@@ -433,11 +456,7 @@ $(function() {
 				$(this).stop().animate({
 					top: track_pos
 				}, 200, 'easeInOutExpo', function() {
-					track_pos = ((new_pos * -1) / sso.fullview.height) * sso.viewport.height;
-					$(this).delay(400).animate({
-						opacity: 0.025,
-						top: track_pos
-					}, 1300, 'easeInOutExpo');
+					track_update();
 				});
 			});
 
@@ -450,13 +469,13 @@ $(function() {
 					$('.ss-page.ss-active').stop().animate({
 						top: bounce_pos
 					}, 350, 'easeOutBack', function() {
-						// Animation complete.
+						track_update();
 					});
 				}
 
 			});
 
-			sso.viewport.position = (bounce_back) ? bounce_pos : new_pos;
+			sso.fullview.position = (bounce_back) ? bounce_pos : new_pos;
 		});
 
 	}
