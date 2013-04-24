@@ -3,8 +3,8 @@ var sso = { };
 function setup_sso() {
 	sso = {
 		axis		: null,
-		yScroll		: 70, // in pixels
-		xScroll		: 750, // in miliseconds
+		yScroll		: 70,   // in pixels
+		xScroll		: 750,  // in miliseconds
 		pages		: {
 			hash		: null,
 			current		: 1,
@@ -96,8 +96,8 @@ function make_page_active() {
 		location.hash = '';
 	
 	sso.flip_to = null;
-
-
+	sso.viewport.position = parseInt( $('.ss-page.ss-active').css('top') );
+	
 	console.log(sso);
 }
 
@@ -125,6 +125,7 @@ function initiate_pages() {
 		console.log('hash set, need to move user');
 		//flip_to(location.hash, 800)
 	}
+	sso.viewport.position = parseInt( $('.ss-page.ss-active').css('top') );
 	console.log(sso);
 }
 
@@ -164,7 +165,7 @@ function flip_to(hash, delay) {
 		var pos_end   = parseInt( $(hash+'.ss-page').attr('data-pageCount') );
 	}
 
-	console.log('flipp_to running: ' + hash);
+	console.log('flip_to running: ' + hash);
 
 	var pos_start = sso.pages.current;
 	var pos_diff  = (pos_end - pos_start) * sso.viewport.width;
@@ -359,6 +360,105 @@ $(function() {
 			console.log(sso);
 			//el.css("-webkit-transform", "translate3d(0, 0, 0)");
 		});
+	}
+
+
+	//
+	// Scroll Bar Functions
+	//
+	function track_height(inner, outer) {
+		var r = inner / outer;
+		if(r < 0.05)
+			r = 0.05;
+		return r * inner;
+	}
+	function track_fade(element, amount) {
+		if( !element.children('.track').hasClass('dragging') ){
+			element.children('.track').stop().animate({
+				opacity: amount
+			}, 400, 'easeInOutExpo', function() {
+
+			});
+		}
+	}
+	//
+	// Scroll Bar Actions
+	//
+	if( !touchEvents ) {
+
+		$('.smarter-scroll .scrollbar').mouseenter(function(){
+			track_fade($(this), 0.35);
+		}).mouseleave(function(){
+			track_fade($(this), 0.025);
+		});
+
+		$('.smarter-scroll').bind('mousewheel', function(e){
+			var new_pos		= null;
+			var bounce_back = false;
+			var bounce_pos	= 0;
+
+			// Which direction?
+			if(e.originalEvent.wheelDelta >= 0) {
+				new_pos = sso.viewport.position + sso.yScroll;
+			} else{
+				new_pos = sso.viewport.position - sso.yScroll;
+			}
+
+			// Are we close to the top or bottom?
+			if(new_pos > 100) {
+				new_pos = 100;
+			} else if( ((new_pos * -1) + sso.viewport.height - 100) > sso.fullview.height ) {
+				new_pos = ((sso.fullview.height * -1) + viewport.height() - 100);
+			}
+
+			// Are we over extended?
+			if(new_pos > 0) {
+				bounce_back = true;
+				bounce_pos	= 0;
+			} else if( ((new_pos * -1) + sso.viewport.height) > sso.fullview.height ) {
+				bounce_back = true;
+				bounce_pos	= ((sso.fullview.height * -1) + sso.viewport.height);
+			}
+
+			// Move Track
+			if(bounce_back == false) {
+				var track_pos = ((new_pos * -1) / sso.fullview.height) * sso.viewport.height;
+			} else {
+				var track_pos = ((bounce_pos * -1) / sso.fullview.height) * sso.viewport.height;
+			}
+
+			$('.track').stop().animate({
+				opacity: 0.35
+			}, 50, 'easeInOutExpo', function() {
+				$(this).stop().animate({
+					top: track_pos
+				}, 200, 'easeInOutExpo', function() {
+					track_pos = ((new_pos * -1) / sso.fullview.height) * sso.viewport.height;
+					$(this).delay(400).animate({
+						opacity: 0.025,
+						top: track_pos
+					}, 1300, 'easeInOutExpo');
+				});
+			});
+
+			// Move content
+			$('.ss-page.ss-active').stop().animate({
+				top: new_pos
+			}, 400, 'easeOutCubic', function() {
+
+				if(bounce_back) {
+					$('.ss-page.ss-active').stop().animate({
+						top: bounce_pos
+					}, 350, 'easeOutBack', function() {
+						// Animation complete.
+					});
+				}
+
+			});
+
+			sso.viewport.position = (bounce_back) ? bounce_pos : new_pos;
+		});
+
 	}
 
 });
