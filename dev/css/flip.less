@@ -12,17 +12,14 @@ body {
 }
 
 .smarter-scroll {
+	position: relative;
 
 	.viewport {
-		position: absolute;
+		position: fixed;
+			top: 0;
+			bottom: 0;
 		overflow: hidden;
 
-		.fullview {
-			width: 100%;
-			position: relative;
-				right: 0;
-				left: 0;
-		}
 		.scrollbar {
 			padding: 5px 5px 5px 10px;
 			position: absolute;
@@ -43,6 +40,9 @@ body {
 				.rounded(5px);
 				z-index: 1000;
 			}
+		}
+		.ss-page {
+			position: relative;
 		}
 	}
 }

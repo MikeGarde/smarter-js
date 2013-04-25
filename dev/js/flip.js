@@ -47,7 +47,7 @@ function update_sso() {
 			height	: $('#' + sso.pages.hash).height()
 		},
 		track	: {
-			height	: $(window).width()
+			height	: $('.scrollbar .track').height()
 		}
 	};
 
@@ -114,8 +114,7 @@ function initiate_pages() {
 		$(this).css({
 			top : 0,
 			left : pos_left,
-			width : sso.viewport.width,
-			position : 'absolute'
+			width : sso.viewport.width
 		});
 	});
 	$('.viewport').css('width', sso.viewport.width);
@@ -280,7 +279,9 @@ function track_update() {
 	var page_visable = sso.viewport.height / sso.fullview.height;
 	var track_height = sso.viewport.height * page_visable;
 	var track_pos = ((sso.fullview.position * -1) / sso.fullview.height) * sso.viewport.height;
-console.log('track_pos: ' + track_pos);
+
+	sso.track.height = track_height;
+	
 	$('.track').delay(400).animate({
 		height: track_height,
 		opacity: 0.025,
@@ -476,9 +477,35 @@ $(function() {
 			});
 
 			sso.fullview.position = (bounce_back) ? bounce_pos : new_pos;
-		});
 
+			$('.track').draggable({
+				containment: "parent",
+				start: function() {
+					console.log('dragstart');
+					$(this).addClass('dragging');
+				},
+				drag: function() {
+					var track_pos	= parseInt( $(this).css('top') );
+					var new_pos = (track_pos / (sso.viewport.height - sso.track.height)) * (sso.fullview.height - sso.viewport.height) * -1;
+
+					$('.ss-page.ss-active').stop().animate({
+						top: new_pos
+					}, 100, 'easeOutBack', function() {
+						// Animation complete.
+					});
+				},
+				stop: function() {
+					var track_pos = parseInt( $(this).css('top') );
+					var new_pos = (track_pos / (sso.viewport.height - sso.track.height)) * (sso.fullview.height - sso.viewport.height) * -1;
+
+					sso.fullview.position = new_pos;
+				}
+			});
+
+		});
 	}
+
+
 
 });
 
