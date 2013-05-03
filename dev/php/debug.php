@@ -5,33 +5,42 @@
  *
  * @author  Mike Garde
  *
- * @param array    $array      Array you want to see.
- * @param boolean  $die        Should this kill the process when done?
- * @param boolean  $return     Do you want this echoed or returned
+ * @param array    $array   Array you want to see.
+ * @param boolean  $die     Should this kill the process when done?
+ * @param boolean  $return  Do you want this echoed or returned
  *
- * @return string A view of an array but formatted for easy reading via HTML.
+ * @return string  $string  A view of an array but formatted for easy reading via HTML.
  */
 function print_a($array=false, $die=true, $return=false) {
 
-	if($return) {
-		echo 'running print_a with return';
-		print_r($array);
-		die();
-	}
+	if(!$return)
+		$return = 0;
 
-
-	if(!$array) {
+	if(!$array && !$return) {
 		$array = $GLOBALS;
 	}
 
-	$result = ((is_array($array)) ? 'Array' : 'stdClass Object') . " (\n";
+	if(!$return) {
+		echo 'return is false<br>';
+		$in = '';
+		$dent = '    ';
+	} elseif($return) {
+		echo 'return is true<br>';
+		$in = str_repeat(' ', ($return*4));
+		$dent = str_repeat(' ', ($return*4)+4);
+	}
+	$indent = $in.$dent;
+	unset($dent);
+
+	$result = ($return) ? ' ' : $in;
+	$result.= ((is_array($array)) ? 'Array' : 'stdClass Object')." (\n";
 	foreach($array as $key => $value) {
 
 		//$result.= '    ['.((preg_match("/^[0-9]+$/", $key)) ? $key : '\''.$key.'\'').'] => ';
-		$result.= '    ['. $key .'] => ';
+		$result.= $indent.'['. $key .'] => ';
 
 		if(is_array($value) || is_object($value))
-			$result.= print_a($value, false, true);
+			$result.= print_a($value, false, $return+1);
 		elseif(strlen($value) == 0)
 			$result.= 'null';
 		elseif(preg_match("/^[0-9]+$/", $value))
@@ -50,10 +59,8 @@ function print_a($array=false, $die=true, $return=false) {
 		}
 		$result.= "\n";
 	}
-	$result.= ')';
+	$result.= $in.')';
 	$result = str_replace(array('    ', "\t"), '&nbsp;&nbsp;&nbsp;&nbsp;', $result);
-
-	echo 'Done Running foreach'."\n";
 
 	/*
 	//$array = object_to_array($array);
@@ -79,10 +86,10 @@ function print_a($array=false, $die=true, $return=false) {
 		$string.= '<script>prettyPrint();</script>';
 		echo $string;
 
-		if ($die)
-			die();
+		if ($die) die();
+
 	} else {
-		return $string;
+		return $result;
 	}
 
 }
