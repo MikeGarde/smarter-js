@@ -178,6 +178,11 @@ function generate_large_array($size=60, $depth=2) {
  * @param string  $end    End time OR leave blank if using previously calculated difference
  *
  * @return string Clean and readable difference in time
+ *
+ *
+ * @example echo clean_time_diff(strtotime('-8 hours -31 minutes'));
+ * @example echo clean_time_diff('2013-05-03 10:15:41');
+ * @example echo clean_time_diff('2015-01-01 00:00:00', '2013-05-03 10:15:41');
  */
 function clean_time_diff($start, $end=false){
 
@@ -226,7 +231,7 @@ function clean_time_diff($start, $end=false){
 		$days = round($diff / 86400);
 		$return = $days.' day'.(($days==1) ? '' : 's');
 
-	// 4 Months
+	// < 4 Months
 	} elseif($diff < 10511769) {
 		$months = floor($diff / 2627942);
 		$days = round((($diff / 2627942) - $months) * 30.416);
