@@ -5,46 +5,86 @@
  *
  * @author  Mike Garde
  *
- * @param array    $array   Array you want to see.
- * @param boolean  $die     Should this kill the process when done?
- * @param boolean  $return  Do you want this echoed or returned
+ * @param array    $array      Array you want to see.
+ * @param boolean  $die        Should this kill the process when done?
+ * @param boolean  $return     Do you want this echoed or returned
  *
  * @return string A view of an array but formatted for easy reading via HTML.
  */
-function print_a($array, $die=true, $return=false) {
+function print_a($array=false, $die=true, $return=false) {
+
+	if($return) {
+		echo 'running print_a with return';
+		print_r($array);
+		die();
+	}
+
 
 	if(!$array) {
 		$array = $GLOBALS;
 	}
 
+	$result = ((is_array($array)) ? 'Array' : 'stdClass Object') . " (\n";
+	foreach($array as $key => $value) {
+
+		//$result.= '    ['.((preg_match("/^[0-9]+$/", $key)) ? $key : '\''.$key.'\'').'] => ';
+		$result.= '    ['. $key .'] => ';
+
+		if(is_array($value) || is_object($value))
+			$result.= print_a($value, false, true);
+		elseif(strlen($value) == 0)
+			$result.= 'null';
+		elseif(preg_match("/^[0-9]+$/", $value))
+			$result.= $value;
+		elseif(preg_match("/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/", $value))
+			$result.= '<span title="'.date("D, M j, Y, g:i a", strtotime($value)).' | '.clean_time_diff($value).'">'.$value.'</span>';
+		else {
+			$value = addcslashes(htmlspecialchars($value), '\'');
+
+			if(strlen($value) > 240) {
+				$value = str_replace(array("\n", "\r"), array('<br />', ''), $value);
+				$result.= '<details><summary>\''.substr($value, 0, 80).'\'</summary>\''.$value.'\'</details>';
+			} else {
+				$result.= '\''.$value.'\'';
+			}
+		}
+		$result.= "\n";
+	}
+	$result.= ')';
+	$result = str_replace(array('    ', "\t"), '&nbsp;&nbsp;&nbsp;&nbsp;', $result);
+
+	echo 'Done Running foreach'."\n";
+
+	/*
 	//$array = object_to_array($array);
-	$array = print_r($array, true);
-	$array = preg_replace('/\[(.*[a-zA-Z]{1}.*)\] => /i', '[\'$1\'] => ', $array);
-	$array = preg_replace_callback('/ => (.*[a-zA-Z!@#$%\^&\*:]{1}.*)\n/i',	"addslashes_2_regex", $array);
+	$array = htmlspecialchars(print_r($array, true));
+	$array = preg_replace('/\[(.*[a-zA-Z]{1}.*)\] =&gt; /i', '[\'$1\'] => ', $array);
+	$array = preg_replace_callback('/ =&gt; ([^0-9^\n]{1}.*)(\n[[\s]{4}\[|\)])/i', "addslashes_2_regex", $array);
 	$array = preg_replace('/ => \'(Array|stdClass Object)\'/i', " => $1", $array);
-	$array = htmlspecialchars($array);
-	$array = str_replace(array('    ', "\t"), '&nbsp;&nbsp;&nbsp;&nbsp;', $array);
+	//$array = htmlspecialchars($array);
+	*/
 
-	$string = '<script src="//google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>';
-	$string.= '<script src="//google-code-prettify.googlecode.com/svn/trunk/src/lang-css.js"></script>';
-	$string.= '<link rel="stylesheet" type="text/css" href="//google-code-prettify.googlecode.com/svn/trunk/src/prettify.css">';
-	$string.= '<link href="//fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet" type="text/css">';
-	$string.= '<style>';
-	$string.= 'pre { background-color: #fff; font-family: \'Ubuntu Mono\', sans-serif; }';
-	$string.= 'li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 { list-style-type: decimal; }';
-	$string.= 'ol { padding: 0 0 0 45px; }';
-	$string.= '</style>';
-	$string.= '<pre class="prettyprint linenums">'. $array .'</pre>';
-	$string.= '<script>prettyPrint();</script>';
-
-	if ($return) {
-		return $string;
-	} else {
+	if(!$return) {
+		$string = '<script src="//google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>';
+		$string.= '<script src="//google-code-prettify.googlecode.com/svn/trunk/src/lang-css.js"></script>';
+		$string.= '<link rel="stylesheet" type="text/css" href="//google-code-prettify.googlecode.com/svn/trunk/src/prettify.css">';
+		$string.= '<link href="//fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet" type="text/css">';
+		$string.= '<style>';
+		$string.= 'pre { background-color: #fff; font-family: \'Ubuntu Mono\', sans-serif; }';
+		$string.= 'li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 { list-style-type: decimal; }';
+		$string.= 'ol { padding: 0 0 0 45px; }';
+		$string.= 'details { display: inline-block; }';
+		$string.= '</style>';
+		$string.= '<pre class="prettyprint linenums">'. $result .'</pre>';
+		$string.= '<script>prettyPrint();</script>';
 		echo $string;
+
+		if ($die)
+			die();
+	} else {
+		return $string;
 	}
 
-	if ($die)
-		die();
 }
 
 
@@ -126,4 +166,19 @@ function generate_large_array($size=60, $depth=2) {
 		$i++;
 	}
 	return $return;
+}
+
+
+/**
+ * Returns an easly readable time difference.
+ *
+ * @author  Mike Garde
+ *
+ * @param string  $start  Start time OR previously calculated difference
+ * @param string  $end    End time OR leave blank if using previously calculated difference
+ *
+ * @return string Clean and readable difference in time
+ */
+function clean_time_diff($start, $end=false){
+	return 'x days ago';
 }
