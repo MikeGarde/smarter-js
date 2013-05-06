@@ -48,7 +48,7 @@ function print_a($array=false, $die=true, $return=false) {
 
 			if(strlen($value) > 240) {
 				$value = str_replace(array("\n", "\r"), array('<br />', ''), $value);
-				$result.= '<details><summary>\''.substr($value, 0, 80).'\'</summary>\''.$value.'\'</details>';
+				$result.= '<details><summary>\''.rtrim(substr($value, 0, 80), '\x92').'\'</summary>\''.$value.'\'</details>';
 			} else {
 				$result.= '\''.$value.'\'';
 			}
