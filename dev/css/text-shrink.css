@@ -1,0 +1,56 @@
+/* CSS crunched with Crunch - http://crunchapp.net/ */
+.wrapper{width:1000px;margin:0 auto;text-align:left;}
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;vertical-align:baseline;}
+h1,h2,h3,h4,h5,h6,p,ul,ol{margin-bottom:10px;}
+em{font-style:italic;}
+div.center{text-align:center;}
+div.clear{padding:0 !important;margin:0 !important;clear:both;height:0 !important;}
+div.hr{height:1px;background-color:#fff;margin-bottom:5px;}
+div.underline{border-bottom:1px solid #000;}
+div.spacer{height:20px;}
+code,pre{font-family:'Ubuntu Mono',Consolas,Monaco,Lucida Console,Courier New,monospace;}
+img.fill{width:100%;}
+body{font-family:'Molle',Georgia,'Times New Roman',Times,Arial,Helvetica,sans-serif;}
+h1,h2,h3,h4{color:#1b374c;font-family:'Roboto',Arial,Helvetica,Verdana,sans-serif;margin-bottom:30px;}
+h1{font-size:32px;line-height:36px;font-weight:400;}
+h2{font-size:20px;line-height:28px;font-weight:400;}
+h3{font-size:25px;line-height:36px;font-weight:400;color:#19482d;}
+h4{font-size:18px;line-height:26px;font-weight:400;color:#19482d;}
+h5{font-size:16px;line-height:24px;font-weight:400;}
+h6{font-size:13px;line-height:19px;font-weight:400;}
+p{font-size:12px;line-height:20px;font-weight:400;color:#472118;margin-bottom:20px;}
+li{font-size:12px;line-height:20px;font-weight:400;color:#472118;}
+a{color:#19482d;font-family:'Molle',Georgia,'Times New Roman',Times,Arial,Helvetica,sans-serif;font-weight:700;text-decoration:none;text-transform:uppercase;}a:visited{color:#898989;}
+a:hover{color:#19482d;}
+a.button,input.button{border:none;color:#fff;font-family:'Roboto',Arial,Helvetica,Verdana,sans-serif;font-size:12px;padding:8px 10px;width:auto;-webkit-border-radius:1px;-moz-border-radius:1px;border-radius:1px;-moz-background-clip:padding;-webkit-background-clip:padding-box;background-clip:padding-box;text-transform:uppercase;}a.button:hover,input.button:hover{color:#fff568;}
+code,pre{background-color:#fff;border:1px solid #19482d;display:block;margin:0 0 20px;padding:10px;}code ol,pre ol{margin-left:30px;}
+form{margin:0 0 20px;}
+.css-classA,.css-classB{display:inline-block;width:49.5%;height:50px;}
+.css-classA{float:left;margin-right:1%;}
+div.color_group{clear:both;position:relative;}div.color_group .tl,div.color_group .bl,div.color_group .tr,div.color_group .br{display:inline-block;width:100px;height:100px;position:absolute;}
+div.color_group .tl,div.color_group .bl{left:0;}
+div.color_group .bl,div.color_group .br{margin-top:100px;}
+div.color_group .main{height:200px;width:790px;margin:0 105px;}
+div.color_group .tr,div.color_group .br{right:0;}
+div.color_group.primary .main{background-color:#1b374c;}
+div.color_group.primary .tl{background-color:#193348;}
+div.color_group.primary .bl{background-color:#193347;}
+div.color_group.primary .tr{background-color:#183145;}
+div.color_group.primary .br{background-color:#183144;}
+div.color_group.complementary .main{background-color:#19482d;}
+div.color_group.complementary .tl{background-color:#19472d;}
+div.color_group.complementary .bl{background-color:#19472c;}
+div.color_group.complementary .tr{background-color:#18452b;}
+div.color_group.complementary .br{background-color:#18442c;}
+div.color_group.secondaryA .main{background-color:#19482d;}
+div.color_group.secondaryA .tl{background-color:#452118;}
+div.color_group.secondaryA .bl{background-color:#452118;}
+div.color_group.secondaryA .tr{background-color:#432017;}
+div.color_group.secondaryA .br{background-color:#422017;}
+div.color_group.secondaryB .main{background-color:#472118;}
+div.color_group.secondaryB .tl{background-color:#453218;}
+div.color_group.secondaryB .bl{background-color:#453218;}
+div.color_group.secondaryB .tr{background-color:#433017;}
+div.color_group.secondaryB .br{background-color:#422f17;}
+body{text-align:center;}
+div.wrapper div{background-color:#a0c4e2;margin:0 0 20px;padding:10px 20px;}div.wrapper div h2{margin:0;padding:0;}
