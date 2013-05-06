@@ -16,16 +16,13 @@ function print_a($array=false, $die=true, $return=false) {
 	if(!$return)
 		$return = 0;
 
-	if(!$array && !$return) {
+	if(!$array && !$return)
 		$array = $GLOBALS;
-	}
 
 	if(!$return) {
-		echo 'return is false<br>';
 		$in = '';
 		$dent = '    ';
 	} elseif($return) {
-		echo 'return is true<br>';
 		$in = str_repeat(' ', ($return*4));
 		$dent = str_repeat(' ', ($return*4)+4);
 	}
@@ -36,7 +33,6 @@ function print_a($array=false, $die=true, $return=false) {
 	$result.= ((is_array($array)) ? 'Array' : 'stdClass Object')." (\n";
 	foreach($array as $key => $value) {
 
-		//$result.= '    ['.((preg_match("/^[0-9]+$/", $key)) ? $key : '\''.$key.'\'').'] => ';
 		$result.= $indent.'['. $key .'] => ';
 
 		if(is_array($value) || is_object($value))
@@ -62,28 +58,20 @@ function print_a($array=false, $die=true, $return=false) {
 	$result.= $in.')';
 	$result = str_replace(array('    ', "\t"), '&nbsp;&nbsp;&nbsp;&nbsp;', $result);
 
-	/*
-	//$array = object_to_array($array);
-	$array = htmlspecialchars(print_r($array, true));
-	$array = preg_replace('/\[(.*[a-zA-Z]{1}.*)\] =&gt; /i', '[\'$1\'] => ', $array);
-	$array = preg_replace_callback('/ =&gt; ([^0-9^\n]{1}.*)(\n[[\s]{4}\[|\)])/i', "addslashes_2_regex", $array);
-	$array = preg_replace('/ => \'(Array|stdClass Object)\'/i', " => $1", $array);
-	//$array = htmlspecialchars($array);
-	*/
-
 	if(!$return) {
-		$string = '<script src="//google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>';
-		$string.= '<script src="//google-code-prettify.googlecode.com/svn/trunk/src/lang-css.js"></script>';
-		$string.= '<link rel="stylesheet" type="text/css" href="//google-code-prettify.googlecode.com/svn/trunk/src/prettify.css">';
-		$string.= '<link href="//fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet" type="text/css">';
-		$string.= '<style>';
-		$string.= 'pre { background-color: #fff; font-family: \'Ubuntu Mono\', sans-serif; }';
-		$string.= 'li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 { list-style-type: decimal; }';
-		$string.= 'ol { padding: 0 0 0 45px; }';
-		$string.= 'details { display: inline-block; }';
-		$string.= '</style>';
-		$string.= '<pre class="prettyprint linenums">'. $result .'</pre>';
-		$string.= '<script>prettyPrint();</script>';
+		$string = '<script src="//google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>'.
+				  '<script src="//google-code-prettify.googlecode.com/svn/trunk/src/lang-css.js"></script>'.
+				  '<link rel="stylesheet" type="text/css" href="//google-code-prettify.googlecode.com/svn/trunk/src/prettify.css">'.
+				  '<link href="//fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet" type="text/css">'.
+				  '<style>'.
+				  'pre { background-color: #fff; font-family: \'Ubuntu Mono\', sans-serif; }'.
+				  'li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 { list-style-type: decimal; }'.
+				  'ol { padding: 0 0 0 45px; }'.
+				  'details, details summary { display: inline-block; }'.
+				  'details[open] summary span { display: none; }'.
+				  '</style>'.
+				  '<pre class="prettyprint linenums">'. $result .'</pre>'.
+				  '<script>prettyPrint();</script>';
 		echo $string;
 
 		if ($die) die();
