@@ -143,27 +143,6 @@ function truncate($string, $len=137, $append='...', $strict=true) {
 }
 
 
-function generate_large_array($size=60, $depth=2) {
-	//echo 'generating large array: '.$size.' / '.$depth.'<br>';
-	$i = 1;
-
-	while ($i <= $size) {
-		if($depth == 0) {
-			$value = rand(5, 99999);
-			//echo $i.' / '. $depth .' : '. $value .'<br>';
-			$return[$i] = $value;
-		} else {
-			$new_size = round(($size / ($depth + 3)), 0, PHP_ROUND_HALF_UP);
-			if($new_size < 3)
-				$new_size = 3;
-			$return[$i] = generate_large_array($new_size, $depth-1);
-		}
-		$i++;
-	}
-	return $return;
-}
-
-
 /**
  * Returns an easly readable time difference.
  *
@@ -247,4 +226,33 @@ function clean_time_diff($start, $end=false){
 
 	}
 	return $return.' '.$tense;
+}
+
+
+/**
+ * Generate large array (random values)
+ *
+ * @author  Mike Garde
+ *
+ * @param number   $size   First depth number of values
+ * @param number   $depth  How deep should the array go
+ *
+ * @return  An array
+ */
+function generate_large_array($size=60, $depth=2) {
+	$i = 1;
+
+	while ($i <= $size) {
+		if($depth == 0) {
+			$value = rand(5, 99999);
+			$return[$i] = $value;
+		} else {
+			$new_size = round(($size / ($depth + 3)), 0, PHP_ROUND_HALF_UP);
+			if($new_size < 3)
+				$new_size = 3;
+			$return[$i] = generate_large_array($new_size, $depth-1);
+		}
+		$i++;
+	}
+	return $return;
 }
