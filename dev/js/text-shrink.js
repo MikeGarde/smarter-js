@@ -50,8 +50,4 @@ $('.s-shrink').each(function(index){
 	
 });
 
-$('.s-shrink').click(function(index){
-	console.log('clicked num_of_lines: '+num_of_lines($(this)));
-});
-
 });
