@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<link rel="stylesheet/less" type="text/css" href="../css/speed.less" />
+	<script type="text/javascript" src="../js/less.js"></script>
+	<script type="text/javascript">
+		less.env = "development";
+		less.watch();
+	</script>
+</head>
+<body>
+	<div>
+		<h1>Speed Test</h1>
+		<h2>Remote Image</h2>
+		<img src="http://farm4.staticflickr.com/3188/2880982738_367c523554_o.jpg" width="454" height="660" />
+		<h2>Hidden Image</h2>
+		<img src="" class="hide" />
+		<p><a href="#">Show Image</a></p>
+	</div>
+	<div id="performance">
+		<div>Prompt for unload</div>
+		<div>redirect</div>
+		<div>App cache</div>
+		<div>DNS</div>
+		<div>TCP</div>
+		<div>Request</div>
+		<div>Response</div>
+		<div class="sub">Unload</div>
+		<div>Processing</div>
+		<div class="sub">DOM Content Loaded</div>
+		<div>load</div>
+	</div>
+	<script src="../js/speed.js"></script>
+</body>
+</html>
