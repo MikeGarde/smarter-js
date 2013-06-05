@@ -53,7 +53,8 @@ div.color_group.secondaryB .tr{background-color:#433017;}
 div.color_group.secondaryB .br{background-color:#422f17;}
 img{float:left;height:40px;width:50px;}img.hide{display:none;}
 div.group{margin:0 0 20px;}
-div#backgrounds div{background-repeat:no-repeat;float:left;width:150px;height:150px;}
+div#backgrounds div,div#sprite div{background-repeat:no-repeat;float:left;width:150px;height:150px;}
+div#sprite div{background-image:url('https://raw.github.com/MikeGarde/smarter-js/master/dev/img/random/sprite.png');}
 div#css div{float:left;height:40px;width:50px;}
 div#css .img3-1{background-image:url('http://farm6.staticflickr.com/5446/8884169561_36e92d9c06_o.jpg');}
 div#css .img3-2{background-image:url('http://farm4.staticflickr.com/3051/2936481448_2f6fa3953e_b.jpg');}
