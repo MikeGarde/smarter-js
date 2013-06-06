@@ -1,6 +1,10 @@
-/* CSS crunched with Crunch - http://crunchapp.net/ */
 .wrapper{width:1000px;margin:0 auto;text-align:left;}
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;vertical-align:baseline;}
+body{-webkit-tap-highlight-color:#b4e4ff;}
+::selection{background-color:#b4e4ff;}
+::-moz-selection{background-color:#b4e4ff;}
+img::selection,img::-moz-selection{background-color:transparent;}
+img.fill{width:100%;}
 h1,h2,h3,h4,h5,h6,p,ul,ol{margin-bottom:10px;}
 em{font-style:italic;}
 div.center{text-align:center;}
@@ -9,7 +13,6 @@ div.hr{height:1px;background-color:#fff;margin-bottom:5px;}
 div.underline{border-bottom:1px solid #000;}
 div.spacer{height:20px;}
 code,pre{font-family:'Ubuntu Mono',Consolas,Monaco,Lucida Console,Courier New,monospace;}
-img.fill{width:100%;}
 body{font-family:'Molle',Georgia,'Times New Roman',Times,Arial,Helvetica,sans-serif;}
 h1,h2,h3,h4{color:#1b374c;font-family:'Roboto',Arial,Helvetica,Verdana,sans-serif;margin-bottom:30px;}
 h1{font-size:32px;line-height:36px;font-weight:400;}

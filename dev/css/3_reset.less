@@ -17,13 +17,13 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 body {
-	-webkit-tap-highlight-color: rgb(255,255,158);
+	-webkit-tap-highlight-color: @highlite;
 }
-::selection 	 	{ background: #b4d7ff; }
-::-moz-selection 	{ background: #b4d7ff; }
+::selection 	 { background-color: @highlite; }
+::-moz-selection { background-color: @highlite; }
 img {
 	&::selection, &::-moz-selection {
-		background: transparent;
+		background-color: transparent;
 	}
 	&.fill {
 		width: 100%;
