@@ -16,6 +16,19 @@ time, mark, audio, video {
 	border: 0;
 	vertical-align: baseline;
 }
+body {
+	-webkit-tap-highlight-color: rgb(255,255,158);
+}
+::selection 	 	{ background: #b4d7ff; }
+::-moz-selection 	{ background: #b4d7ff; }
+img {
+	&::selection, &::-moz-selection {
+		background: transparent;
+	}
+	&.fill {
+		width: 100%;
+	}
+}
 h1, h2, h3, h4, h5, h6, p, ul, ol {
 	margin-bottom: 10px;
 }
@@ -46,7 +59,4 @@ div {
 }
 code, pre {
 	.font-mono();
-}
-img.fill {
-	width: 100%;
 }

@@ -34,7 +34,7 @@ $('img:onScreen[data-src]').each(function(){
 $(document).scroll(function(){
 	console.log('scroll happened');
 	$('img:onScreen[data-src]').each(function(){
-		$(this).attr('src', $(this).attr('data-src'));
+		$(this).attr('src', $(this).attr('data-src')).stop(true,true).hide().fadeIn(300);
 		$(this).removeAttr('data-src');
 	});
 });

@@ -1,0 +1,119 @@
+@import "_style.less";
+
+// From http://lessframework.com/
+
+/*		Default Layout: 992px.
+		Gutters: 24px.
+		Outer margins: 48px.
+		Leftover space for scrollbars @1024px: 32px.
+-------------------------------------------------------------------------------
+cols    1     2      3      4      5      6      7      8      9      10
+px      68    160    252    344    436    528    620    712    804    896    */
+
+body {
+	background: rgb(232,232,232);
+	background-repeat: no-repeat;
+	background-position: center top;
+	/* Bug */
+	background-image: url('http://farm8.staticflickr.com/7437/8864579484_803ad28b9e_k.jpg');
+	width: 896px;
+	padding: 72px 48px 84px;
+	color: rgb(60,60,60);
+	-webkit-text-size-adjust: 100%; /* Stops Mobile Safari from auto-adjusting font-sizes */
+}
+
+
+
+/*		Tablet Layout: 768px.
+		Gutters: 24px.
+		Outer margins: 28px.
+		Inherits styles from: Default Layout.
+-----------------------------------------------------------------
+cols    1     2      3      4      5      6      7      8
+px      68    160    252    344    436    528    620    712    */
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+	body {
+		/* HDR Pub */
+		background-image: url('http://farm6.staticflickr.com/5446/8884169561_36e92d9c06_o.jpg');
+		width: 712px;
+		padding: 48px 28px 60px;
+	}
+}
+
+
+
+/*		Mobile Layout: 320px.
+		Gutters: 24px.
+		Outer margins: 34px.
+		Inherits styles from: Default Layout.
+---------------------------------------------
+cols    1     2      3
+px      68    160    252    */
+
+@media only screen and (max-width: 767px) {
+
+	body {
+		/* Lincoln */
+		background-image: url('http://farm4.staticflickr.com/3051/2936481448_2f6fa3953e_b.jpg');
+		width: 252px;
+		padding: 48px 34px 60px;
+	}
+
+}
+
+
+
+/*		Wide Mobile Layout: 480px.
+		Gutters: 24px.
+		Outer margins: 22px.
+		Inherits styles from: Default Layout, Mobile Layout.
+------------------------------------------------------------
+cols    1     2      3      4      5
+px      68    160    252    344    436    */
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+
+	body {
+		/* Boats */
+		background-image: url('http://farm6.staticflickr.com/5321/8865223270_30c97b73d6_b.jpg');
+		width: 436px;
+		padding: 36px 22px 48px;
+	}
+
+}
+
+/*		Mobile Layout: 320px.
+		Gutters: 24px.
+		Outer margins: 34px.
+		Inherits styles from: Default Layout.
+---------------------------------------------
+cols    1     2      3
+px      68    160    252    */
+
+@media only screen and (max-width: 479px) {
+
+	body {
+		/* Car in Water */
+		background-image: url('http://farm4.staticflickr.com/3188/2880982738_367c523554_o.jpg');
+		width: 252px;
+		padding: 48px 34px 60px;
+	}
+
+}
+
+/*	Retina media query.
+	Overrides styles for devices with a
+	device-pixel-ratio of 2+, such as iPhone 4.
+-----------------------------------------------    */
+
+@media
+	only screen and (-webkit-min-device-pixel-ratio: 2),
+	only screen and (min-device-pixel-ratio: 2) {
+
+	body {
+		background-image: url('http://farm6.staticflickr.com/5461/8868324003_2bdfba2484_h.jpg');
+	}
+
+}
