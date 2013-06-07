@@ -267,6 +267,8 @@ function track_height(inner, outer) {
 }
 function track_fade(element, amount) {
 	if( !element.children('.track').hasClass('dragging') ){
+		amount = (amount === 'in') ? 0.35 : 0.06;
+		console.log('fading to: '+amount);
 		element.children('.track').stop().animate({
 			opacity: amount
 		}, 400, 'easeInOutExpo', function() {
@@ -406,12 +408,6 @@ $(function() {
 	//
 	if( !touchEvents ) {
 
-		$('.smarter-scroll .scrollbar').mouseenter(function(){
-			track_fade($(this), 0.35);
-		}).mouseleave(function(){
-			track_fade($(this), 0.06);
-		});
-
 		//
 		// Scroll Wheel Actions
 		//
@@ -449,11 +445,6 @@ $(function() {
 						(((new_pos * -1) / sso.fullview.height) * sso.track.container) :
 						(((bounce_pos * -1) / sso.fullview.height) * sso.track.container);
 
-			console.log('-------------');
-			console.log(track_pos);
-			console.log(sso.track.height);
-			console.log('-------------');
-
 			$('.track').stop().animate({
 				top: track_pos
 			}, 400, 'easeOutExpo', function() {
@@ -477,29 +468,43 @@ $(function() {
 
 			sso.fullview.position = (bounce_back) ? bounce_pos : new_pos;
 
-			$('.track').draggable({
-				containment: "parent",
-				start: function() {
-					console.log('dragstart');
-					$(this).addClass('dragging');
-				},
-				drag: function() {
-					var track_pos	= parseInt( $(this).css('top') );
-					var new_pos = (track_pos / (sso.viewport.height - sso.track.height)) * (sso.fullview.height - sso.viewport.height) * -1;
+		});
 
-					$('.ss-page.ss-active').stop().animate({
-						top: new_pos
-					}, 100, 'easeOutBack', function() {
-						// Animation complete.
-					});
-				},
-				stop: function() {
-					var track_pos = parseInt( $(this).css('top') );
-					var new_pos = (track_pos / (sso.viewport.height - sso.track.height)) * (sso.fullview.height - sso.viewport.height) * -1;
 
-					sso.fullview.position = new_pos;
-				}
-			});
+		//
+		// Draging Track
+		//
+		$('.smarter-scroll .scrollbar').mouseenter(function(){
+			console.log('mouse in');
+			track_fade($(this), 'in');
+		}).mouseleave(function(){
+			console.log('mouse out');
+			track_fade($(this), 'out');
+		});
+		$('.track').draggable({
+			containment: "parent",
+			start: function() {
+				console.log('dragstart');
+				$(this).addClass('dragging');
+			},
+			drag: function() {
+				var track_pos	= parseInt( $(this).css('top') );
+				var new_pos = (track_pos / (sso.track.container - sso.track.height)) * (sso.fullview.height - sso.viewport.height) * -1;
+
+				$('.ss-page.ss-active').stop().animate({
+					top: new_pos
+				}, 100, 'easeOutBack', function() {
+					// Animation complete.
+				});
+			},
+			stop: function() {
+				var track_pos = parseInt( $(this).css('top') );
+				var new_pos = (track_pos / (sso.track.container - sso.track.height)) * (sso.fullview.height - sso.viewport.height) * -1;
+
+				sso.fullview.position = new_pos;
+				$(this).removeClass('dragging');
+				track_fade($('.smarter-scroll .scrollbar'), 'out');
+			}
 		});
 	}
 });
