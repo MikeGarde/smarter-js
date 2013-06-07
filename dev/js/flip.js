@@ -281,12 +281,16 @@ function track_update() {
 	var track_pos = ((sso.fullview.position * -1) / sso.fullview.height) * sso.viewport.height;
 
 	sso.track.height = track_height;
-	
-	$('.track').delay(400).animate({
+
+	$('.track').delay(0).animate({
 		height: track_height,
 		opacity: 0.025,
 		top: track_pos
-	}, 1300, 'easeInOutExpo');
+	}, 300, 'easeInOutExpo');
+
+	$('.track').delay(400).animate({
+		top: track_pos
+	}, 0, 'easeInOutExpo');
 }
 
 
@@ -345,7 +349,6 @@ $(function() {
 			//console.log(sso.touch.diff);
 
 			if(!sso.axis) {
-
 				if( (Math.abs(sso.touch.diff.x) > 20) || (Math.abs(sso.touch.diff.y) > 20) ) {
 
 					if(sso.touch.diff.ratio < 0.5) {
@@ -355,17 +358,11 @@ $(function() {
 						sso.axis = 'x';
 						console.log('right or left');
 					}
-
 				}
-
 			} else {
-
 				if(sso.axis == 'y') {
 
-
-
 				} else if(sso.axis == 'x') {
-				
 					$('.ss-page').each(function(){
 						var new_pos = $(this).attr('data-left') - sso.touch.diff.x;
 						$(this).css({left: new_pos});
@@ -376,7 +373,6 @@ $(function() {
 		$('.viewport').bind('touchend', function(e) {
 			//e.preventDefault();
 			console.log('touchend');
-
 
 			if(sso.axis == 'y') {
 
@@ -406,7 +402,7 @@ $(function() {
 
 
 	//
-	// Scroll Bar Actions
+	// Scroll Wheel Actions
 	//
 	if( !touchEvents ) {
 
@@ -501,12 +497,8 @@ $(function() {
 					sso.fullview.position = new_pos;
 				}
 			});
-
 		});
 	}
-
-
-
 });
 
 
@@ -534,41 +526,33 @@ $(window).resize(function() {
 });
 
 
-
+//
 // Key Hit
+//
 $(document).keyup(function(e) {
 
 	switch(e.keyCode) {
-		case 32:
-			// 32 = space
+		case 32: // space
 			break;
-		case 33:
-			// 33 = page up
+		case 33: // page up
 			break;
-		case 34:
-			// 34 = page down
+		case 34: // page down
 			break;
-		case 35:
-			// 35 = end
+		case 35: // end
 			break;
-		case 36:
-			// 36 = home
+		case 36: // home
 			break;
-		case 37:
-			// 37 = left
+		case 37: // left
 			console.log('left key hit');
 			flip_page('prev');
 			break;
-		case 38:
-			// 38 = up
+		case 38: // up
 			break;
-		case 39:
-			// 39 = right
+		case 39: // right
 			console.log('right key hit');
 			flip_page('next');
 			break;
-		case 40:
-			// 40 = down
+		case 40: // down
 			break;
 	}
 });
