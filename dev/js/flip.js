@@ -47,7 +47,8 @@ function update_sso() {
 			height	: $('#' + sso.pages.hash).height()
 		},
 		track	: {
-			height	: $('.scrollbar .track').height()
+			container: $('.scrollbar').height(),
+			height	 : $('.scrollbar .track').height()
 		}
 	};
 
@@ -238,7 +239,6 @@ function flip_page(direction, new_pos, time, delay) {
 	flip_action(new_pos, time, delay);
 }
 
-
 function flip_action(new_pos, time, delay) {
 	console.log('new_pos: ' + new_pos);
 	if(time==undefined)
@@ -277,14 +277,14 @@ function track_fade(element, amount) {
 function track_update() {
 
 	var page_visable = sso.viewport.height / sso.fullview.height;
-	var track_height = sso.viewport.height * page_visable;
-	var track_pos = ((sso.fullview.position * -1) / sso.fullview.height) * sso.viewport.height;
+	var track_height = sso.track.container * page_visable;
+	var track_pos = ((sso.fullview.position * -1) / sso.fullview.height) * sso.track.container;
 
 	sso.track.height = track_height;
 
 	$('.track').delay(0).animate({
 		height: track_height,
-		opacity: 0.025,
+		opacity: 0.06,
 		top: track_pos
 	}, 300, 'easeInOutExpo');
 
@@ -402,20 +402,24 @@ $(function() {
 
 
 	//
-	// Scroll Wheel Actions
+	// Non-Touch-Screen Events
 	//
 	if( !touchEvents ) {
 
 		$('.smarter-scroll .scrollbar').mouseenter(function(){
 			track_fade($(this), 0.35);
 		}).mouseleave(function(){
-			track_fade($(this), 0.025);
+			track_fade($(this), 0.06);
 		});
 
+		//
+		// Scroll Wheel Actions
+		//
 		$('.smarter-scroll').bind('mousewheel', function(e){
 			var new_pos		= null;
 			var bounce_back = false;
 			var bounce_pos	= 0;
+			var track_pos	= 0;
 
 			// Which direction?
 			if(e.originalEvent.wheelDelta >= 0) {
@@ -441,20 +445,19 @@ $(function() {
 			}
 
 			// Move Track
-			if(bounce_back == false) {
-				var track_pos = ((new_pos * -1) / sso.fullview.height) * sso.viewport.height;
-			} else {
-				var track_pos = ((bounce_pos * -1) / sso.fullview.height) * sso.viewport.height;
-			}
+			track_pos = (bounce_back == false) ?
+						(((new_pos * -1) / sso.fullview.height) * sso.track.container) :
+						(((bounce_pos * -1) / sso.fullview.height) * sso.track.container);
+
+			console.log('-------------');
+			console.log(track_pos);
+			console.log(sso.track.height);
+			console.log('-------------');
 
 			$('.track').stop().animate({
-				opacity: 0.35
-			}, 50, 'easeInOutExpo', function() {
-				$(this).stop().animate({
-					top: track_pos
-				}, 200, 'easeInOutExpo', function() {
-					track_update();
-				});
+				top: track_pos
+			}, 400, 'easeOutExpo', function() {
+				//track_update();
 			});
 
 			// Move content
