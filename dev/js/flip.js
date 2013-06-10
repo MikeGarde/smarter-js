@@ -284,15 +284,12 @@ function track_update() {
 
 	sso.track.height = track_height;
 
-	$('.track').delay(0).animate({
+	$('.track').stop().animate({
 		height: track_height,
 		opacity: 0.06,
 		top: track_pos
 	}, 300, 'easeInOutExpo');
 
-	$('.track').delay(400).animate({
-		top: track_pos
-	}, 0, 'easeInOutExpo');
 }
 
 
@@ -362,8 +359,10 @@ $(function() {
 					}
 				}
 			} else {
+				// up/down
 				if(sso.axis == 'y') {
 
+				// left/right
 				} else if(sso.axis == 'x') {
 					$('.ss-page').each(function(){
 						var new_pos = $(this).attr('data-left') - sso.touch.diff.x;
@@ -529,6 +528,8 @@ $(window).load(function() {
 $(window).resize(function() {
 
 	update_sso();
+	track_update();
+	initiate_pages();
 	console.log(sso);
 	
 });
