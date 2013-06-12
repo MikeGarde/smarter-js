@@ -1,3 +1,4 @@
+window.onload=function() {
 // onScreen jQuery plugin v0.2.1
 // (c) 2011 Ben Pickles
 //
@@ -22,9 +23,22 @@
 })(jQuery);
 // onScreen Done
 
+var lazy_images_interval;
+lazy_images_interval = setInterval(find_lazy_images,1000);
 
+function find_lazy_images(){
+    jQuery('img:onScreen[data-src]').each(function(){
+		jQuery(this).attr('src', jQuery(this).attr('data-src'));
+		jQuery(this).removeAttr('data-src');
+	});
 
-window.onload=function() {
+	jQuery(document).scroll(function(){
+		jQuery('img:onScreen[data-src]').each(function(){
+			jQuery(this).attr('src', jQuery(this).attr('data-src')).stop(true,true).hide().fadeIn(300);
+			jQuery(this).removeAttr('data-src');
+		});
+	});
+}
 
 jQuery('img:onScreen[data-src]').each(function(){
 	jQuery(this).attr('src', jQuery(this).attr('data-src'));
@@ -38,4 +52,4 @@ jQuery(document).scroll(function(){
 	});
 });
 	
-}
+};
