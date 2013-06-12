@@ -39,11 +39,13 @@ function update_sso() {
 	
 	var sso2 = {
 		viewport	: {
-			width	: $(window).width(),
+			//width	: $(window).width(),
+			width	: 500,
 			height	: $(window).height()
 		},
 		fullview	: {
-			width	: $(window).width() * sso.pages.count,
+			//width	: $(window).width() * sso.pages.count,
+			width	: 500 * sso.pages.count,
 			height	: $('#' + sso.pages.hash).height()
 		},
 		track	: {
@@ -105,6 +107,8 @@ function make_page_active() {
 	sso.flip_to = null;
 	sso.fullview.position = parseInt( $('.ss-page.ss-active').css('top') );
 	
+	track_update();
+
 	console.log(sso);
 }
 
@@ -143,7 +147,7 @@ function update_pages() {
 // Horizontal Actions
 //
 function flip_to(hash, delay) {
-	console.log('flipp_to running');
+	console.log('flip_to running');
 
 	if(isInt(hash)) {
 		console.log(' as int: ' + hash);
@@ -167,11 +171,12 @@ function flip_to(hash, delay) {
 
 		console.log(' as hash: ' + hash);
 
-		if($(hash+'.ss-page').length === 0){
+		if($('#'+hash+'.ss-page').length === 0){
 			location.hash = '';
+			console.log('hash not found');
 			return false;
 		}
-		var pos_end   = parseInt( $(hash+'.ss-page').attr('data-pageCount') );
+		var pos_end   = parseInt( $('#'+hash+'.ss-page').attr('data-pageCount') );
 	}
 
 	console.log('flip_to running: ' + hash);
@@ -361,6 +366,8 @@ $(function() {
 			} else {
 				// up/down
 				if(sso.axis == 'y') {
+
+
 
 				// left/right
 				} else if(sso.axis == 'x') {
