@@ -124,3 +124,13 @@ if (!window.getComputedStyle) {
         return this;
     }
 }
+
+// Laxy device detection
+var device_width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+var GLOBAL_device = 'unknown';
+if(device_width > 999)
+	GLOBAL_device = 'desktop';
+else if(device_width > 730)
+	GLOBAL_device = 'tablet';
+else if(device_width < 731)
+	GLOBAL_device = 'mobile';
