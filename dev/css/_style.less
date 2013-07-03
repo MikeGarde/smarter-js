@@ -35,8 +35,10 @@ a {
 	}
 }
 .button() {
-	//background: @orange url('../img/bg---gradient-button.png') repeat-x left bottom;
-	border: none;
+	@base: #42d969;
+
+	.bw-gradient(@base, 20, 50);
+	border: 1px solid @base;
 	color: #fff;
 	.font-sans();
 	font-size: 12px;
@@ -51,6 +53,11 @@ a {
 }
 a.button, input.button {
 	.button();
+}
+div.button {
+	.button();
+
+	margin: 0 0 @textMargin 0;
 }
 code, pre {
 	background-color: #fff;
