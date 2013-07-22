@@ -1,4 +1,5 @@
 var updateProgressInterval;
+var cl_loc = 'js/content-listener.js';
 
 /*
  * Get value of 'name' parameter from URL
@@ -154,10 +155,10 @@ function update_page(ajaxurl, postData){
 								window[value]();
 							});
 						}
-						
+
 					},
 		error:		function() {
-						$('#blackout').click();
+						$('#sj_blackout').click();
 						updateProgressInterval = window.clearInterval(updateProgressInterval);
 						alert('Oops! I couldn\'t "phone home". Please refresh the page and I\'ll try to do better.');
 					}
@@ -170,23 +171,23 @@ function adjustOverlayPos(future_scripts){
 
 	if(future_scripts == undefined) var future_scripts = [];
 
-	var viewport_height = $('#blackout').height();
+	var viewport_height = $('#sj_blackout').height();
 	console.log('viewport_height: ' + viewport_height);
 
-	$('#overlay').css('margin-top', height * -1.5);
-	$('#overlay').show();
+	$('#sj_overlay').css('margin-top', height * -1.5);
+	$('#sj_overlay').show();
 
-	var paddingLR =	parseInt( $('#overlay').css('padding-right').replace(/[^-\d\.]/g, '') )
-				  + parseInt( $('#overlay').css('padding-left').replace(/[^-\d\.]/g, '') );
+	var paddingLR =	parseInt( $('#sj_overlay').css('padding-right').replace(/[^-\d\.]/g, '') )
+				  + parseInt( $('#sj_overlay').css('padding-left').replace(/[^-\d\.]/g, '') );
 
-	var paddingTB =	parseInt( $('#overlay').css('padding-top').replace(/[^-\d\.]/g, '') )
-				  + parseInt( $('#overlay').css('padding-bottom').replace(/[^-\d\.]/g, '') );
+	var paddingTB =	parseInt( $('#sj_overlay').css('padding-top').replace(/[^-\d\.]/g, '') )
+				  + parseInt( $('#sj_overlay').css('padding-bottom').replace(/[^-\d\.]/g, '') );
 
 	console.log('paddingTB: ' + paddingTB);
 	console.log('paddingLR: ' + paddingLR);
 
-	var width  = $('#overlay_holder').width();
-	var height = $('#overlay_holder').height();
+	var width  = $('#sj_overlay_holder').width();
+	var height = $('#sj_overlay_holder').height();
 
 	console.log('width: ' + width);
 	console.log('height: ' + height);
@@ -200,20 +201,20 @@ function adjustOverlayPos(future_scripts){
 	var margin_top = (viewport_height * 0.5) - (full_height * 0.5);
 	console.log('margin_top: ' + margin_top);
 
-	$('#overlay').animate({
+	$('#sj_overlay').animate({
 		width: width,
 		height: height,
 		'margin-top': margin_top,
 		'margin-left': (full_width * -0.5)
 	}, 800, 'easeOutCirc', function() {
 
-		$('#overlay').html( $('#overlay_holder').html() );
-		$('#overlay_holder').html('empty');
+		$('#sj_overlay').html( $('#sj_overlay_holder').html() );
+		$('#sj_overlay_holder').html('empty');
 
 		$.each(future_scripts, function(index, value) {
 			getScript(value);
 		});
-		getScript('../js/content-listener.js');
+		getScript( cl_loc );
 	});
 
 	console.log('------------POPUP DONE------------');
@@ -229,7 +230,7 @@ function adjustOverlayPos(future_scripts){
  */
 function popup(element, data){
 
-	$('#overlay_holder').html( $('#overlay_reference').html() );
+	$('#sj_overlay_holder').html( $('#sj_overlay_reference').html() );
 
 	if(data == undefined) var data = new Array();
 
@@ -243,6 +244,7 @@ function popup(element, data){
 	var height = element.attr('data-height');
 	var link = element.attr('data-link');
 	var action = element.attr('data-action');
+	var window_width = $(window).width(); // Combine later with sso from flip
 
 	console.log('src: ' + src);
 	console.log('Popup Type: '+ type);
@@ -253,10 +255,10 @@ function popup(element, data){
 
 	if(link == undefined) {
 		action = '';
-		$('#overlay .footer').hide();
+		$('#sj_overlay .footer').hide();
 	} else {
 		action = '<a href="'+ link +'" class="button">'+ action +'</a>';
-		$('#overlay .footer').show();
+		$('#sj_overlay .footer').show();
 	}
 
 	switch(type){
@@ -302,8 +304,8 @@ function popup(element, data){
 
 			var link = src;
 
-			$('#blackout.close').removeClass('close').addClass('refresh');
-			$('#overlay_holder .close').removeClass('close').addClass('refresh');
+			$('#sj_blackout.close').removeClass('close').addClass('refresh');
+			$('#sj_overlay_holder .close').removeClass('close').addClass('refresh');
 
 			break;
 		case'ajax':
@@ -348,11 +350,11 @@ function popup(element, data){
 	console.log('height: ' + height);
 	console.log('content: ' + content);
 
-	$('#blackout').fadeIn(500);
+	$('#sj_blackout').fadeIn(500);
 
-	$('#overlay_holder .header h3').html(title);
-	$('#overlay_holder .body').html( content );
-	$('#overlay_holder .footer').html(action);
+	$('#sj_overlay_holder .sj_header h3').html(title);
+	$('#sj_overlay_holder .sj_body').html( content );
+	$('#sj_overlay_holder .sj_footer').html(action);
 
 	if(type != 'ajax') {
 		adjustOverlayPos();
@@ -361,15 +363,15 @@ function popup(element, data){
 
 function close_overlay(){
 
-	var new_margin = Math.round( $('#overlay').outerHeight() * -1.1 );
+	var new_margin = Math.round( $('#sj_overlay').outerHeight() * -1.1 );
 	console.log('new_margin: ' + new_margin);
 
-	$('#overlay').stop().animate({
+	$('#sj_overlay').stop().animate({
 		marginTop: new_margin
 	}, 750, function() {
 		console.log('Overlay Animation Done');
-		$('#overlay').hide().html('').width(0).height(0).css('margin-left', 0);
-		$('#blackout').fadeOut(500);
+		$('#sj_overlay').hide().html('').width(0).height(0).css('margin-left', 0);
+		$('#sj_blackout').fadeOut(500);
 	});
 }
 
@@ -412,7 +414,7 @@ $(document).ready(function(){
 	$(document).keyup(function(e) {
 		esc_key(e);
 	});
-	getScript('../js/content-listener.js');
+	getScript( cl_loc );
 });
 
 

@@ -1,14 +1,9 @@
-@grey: #464646;
-@grey_lite: #ebebeb;
-@grey_med: #989898;
-@grey_dark: #4b4b4a;
+@sj_overlay_grey: #464646;
+@sj_overlay_grey_lite: #ebebeb;
+@sj_overlay_grey_med: #989898;
+@sj_overlay_grey_dark: #4b4b4a;
 
-@import "_style.less";
-
-body {
-	text-align: center;
-}
-.overlay(){
+.sj_overlay(){
 	background: #fff url('../img/loading.gif') no-repeat 50% 50%;
 
 	display: none;
@@ -17,18 +12,18 @@ body {
 	width: auto;
 	height: auto;
 
-	.close, .refresh {
+	.sj_close, .sj_refresh {
 		text-align: right;
 		z-index: 2000;
 
 		button {
-			background-color: @grey_med;
-			border: 3px solid @grey_lite;
+			background-color: @sj_overlay_grey_med;
+			border: 3px solid @sj_overlay_grey_lite;
 			.box-shadow(none);
-			color: @grey_lite;
+			color: @sj_overlay_grey_lite;
 			cursor: pointer;
 			font-weight: 700;
-			.gradient(@grey_med, @grey_med, @grey_med);
+			.gradient(@sj_overlay_grey_med, @sj_overlay_grey_med, @sj_overlay_grey_med);
 			outline: none;
 			margin: -20px -15px 0 0;
 			padding: 3px 8px;
@@ -38,17 +33,17 @@ body {
 			z-index: 5000;
 		}
 	}
-	.header {
+	.sj_header {
 		padding-bottom: 5px;
 
 		h3 {
-			color: lighten(@grey, 18%);
+			color: lighten(@sj_overlay_grey, 18%);
 			font-size: 30px;
 			text-transform: none;
 		}
 	}
-	.body {}
-	.footer {
+	.sj_body {}
+	.sj_footer {
 		padding: 22px 0 5px;
 
 		a.button {
@@ -66,17 +61,17 @@ body {
 	}
 }
 
-#overlay {
-	border: 3px solid @grey_lite;
+#sj_overlay {
+	border: 3px solid @sj_overlay_grey_lite;
 	//.box-shadow(0 0 30px 0px #fff);
 	padding: 25px;
 	left: 50%;
 	top: 0;
 	z-index: 1001;
-	.overlay();
+	.sj_overlay();
 }
 
-#overlay_holder {
+#sj_overlay_holder {
 	overflow: hidden;
 
 	padding: 0;
@@ -87,14 +82,14 @@ body {
 
 	z-index: 1000;
 
-	.overlay();
+	.sj_overlay();
 }
 
-#overlay_reference {
+#sj_overlay_reference {
 	display: none;
 }
 
-#blackout {
+#sj_blackout {
 	background-image: url('../img/overlay---bg.png');
 	color: #fff;
 	display: none;
@@ -108,50 +103,4 @@ body {
 	right: 0;
 
 	z-index: 999;
-}
-
-
-// Progress Bar
-
-.progress {
-	background-color: @grey_lite;
-	color: @grey_dark;
-	padding: 5px 5px 5px 15px;
-	width: 380px;
-	height: 20px;
-	position: relative;
-
-	&.started {
-		color: #fff;
-	}
-	.bar {
-		background: #dd5901 url('../img/progress---orange.png');
-		height: 30px;
-		width: 0px;
-		position: absolute;
-		top: 0px;
-		left: 0px;
-		z-index: 0;
-	}
-	span {
-		display: block;
-		position: absolute;
-		top: 6px;
-		z-index: 100;
-	}
-
-	// Alt
-	&.beige {
-		background: #f8f3e3 url('../img/progress---beige.png');
-		float: left;
-		height: 33px;
-		width: 460px;
-		padding: 0;
-		margin: 0;
-
-		.bar {
-			background: #cb4f00 url('../img/progress---orange-solid.png');
-			height: 33px;
-		}
-	}
 }
