@@ -244,7 +244,8 @@ function popup(element, data){
 	var height = element.attr('data-height');
 	var link = element.attr('data-link');
 	var action = element.attr('data-action');
-	var window_width = $(window).width(); // Combine later with sso from flip
+	var window_width  = $(window).width();  // Combine later with sso from flip
+	var window_height = $(window).height(); // ^ me too
 
 	console.log('src: ' + src);
 	console.log('Popup Type: '+ type);
