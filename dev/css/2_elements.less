@@ -141,78 +141,95 @@
     Additonal Class Elements
 -----------------------------------------------------*/
 .embossed() {
-	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -2px 0 rgba(0,0,0,.25), inset 0 -3px 0 rgba(255,255,255,.2), 0 1px 0 rgba(0,0,0,.1);
-	   -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -2px 0 rgba(0,0,0,.25), inset 0 -3px 0 rgba(255,255,255,.2), 0 1px 0 rgba(0,0,0,.1);
-			box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -2px 0 rgba(0,0,0,.25), inset 0 -3px 0 rgba(255,255,255,.2), 0 1px 0 rgba(0,0,0,.1);
+  -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -2px 0 rgba(0,0,0,.25), inset 0 -3px 0 rgba(255,255,255,.2), 0 1px 0 rgba(0,0,0,.1);
+     -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -2px 0 rgba(0,0,0,.25), inset 0 -3px 0 rgba(255,255,255,.2), 0 1px 0 rgba(0,0,0,.1);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -2px 0 rgba(0,0,0,.25), inset 0 -3px 0 rgba(255,255,255,.2), 0 1px 0 rgba(0,0,0,.1);
 }
 .background-size(@arguments: cover) {
 -webkit-background-size: @arguments;
    -moz-background-size: @arguments;
-	 -o-background-size: @arguments;
-		background-size: @arguments;
+   -o-background-size: @arguments;
+    background-size: @arguments;
 }
 .text-shadow(@x-axis: 0, @y-axis: 1px, @blur: 2px, @color: #ccc) {
-	-webkit-text-shadow: @x-axis @y-axis @blur @color;
-	   -moz-text-shadow: @x-axis @y-axis @blur @color;
-			text-shadow: @x-axis @y-axis @blur @color;
+  -webkit-text-shadow: @x-axis @y-axis @blur @color;
+     -moz-text-shadow: @x-axis @y-axis @blur @color;
+      text-shadow: @x-axis @y-axis @blur @color;
 }
 /*---------------------------------------------------
     Think BIG Elements
 -----------------------------------------------------*/
-.wrap(@width: 1000px, @align: left) {
-	width: @width;
-	margin: 0 auto;
-	text-align: @align;
+.wrap(@width: @page_width, @max_width: @page_width_max, @align: left) {
+  width: @width;
+  max-width: @max_width;
+  margin: 0 auto;
+  text-align: @align;
 }
 .wrapper { .wrap(); }
+
+// Desktop & Tablet
 .row(@span1_width: 7.0225%, @span1_margin: 1.43%) {
 
-	.row {
-		clear: both;
-	}
-	.span1, .span2, .span3, .span4, .span5, .span6, .span7, .span8, .span9, .span10, .span11, .span12 {
-		float: left;
-		margin-left: @span1_margin;
-	}
-	.span1:first-of-type, .span2:first-of-type, .span3:first-of-type, .span4:first-of-type, .span5:first-of-type,
-	.span6:first-of-type, .span7:first-of-type, .span8:first-of-type, .span9:first-of-type, .span10:first-of-type,
-	.span11:first-of-type, .span12:first-of-type {
-		margin-left: 0;
-	}
+  .row {
+    clear: both;
+  }
+  .span1, .span2, .span3, .span4, .span5, .span6, .span7, .span8, .span9, .span10, .span11, .span12 {
+    float: left;
+    margin-left: @span1_margin;
+  }
+  .span1:first-of-type, .span2:first-of-type, .span3:first-of-type, .span4:first-of-type, .span5:first-of-type,
+  .span6:first-of-type, .span7:first-of-type, .span8:first-of-type, .span9:first-of-type, .span10:first-of-type,
+  .span11:first-of-type, .span12:first-of-type {
+    margin-left: 0;
+  }
 
-	.span1  { width: @span1_width; }
-	.span2  { width: @span1_width * 2 + @span1_margin; }
-	.span3  { width: @span1_width * 3 + @span1_margin * 2; }
-	.span4  { width: @span1_width * 4 + @span1_margin * 3; }
-	.span5  { width: @span1_width * 5 + @span1_margin * 4; }
-	.span6  { width: @span1_width * 6 + @span1_margin * 5; }
-	.span7  { width: @span1_width * 7 + @span1_margin * 6; }
-	.span8  { width: @span1_width * 8 + @span1_margin * 7; }
-	.span9  { width: @span1_width * 9 + @span1_margin * 8; }
-	.span10 { width: @span1_width * 10 + @span1_margin * 9; }
-	.span11 { width: @span1_width * 11 + @span1_margin * 10; }
-	.span12 { width: @span1_width * 12 + @span1_margin * 11; }
+  .span1  { width: @span1_width; }
+  .span2  { width: @span1_width * 2 + @span1_margin; }
+  .span3  { width: @span1_width * 3 + @span1_margin * 2; }
+  .span4  { width: @span1_width * 4 + @span1_margin * 3; }
+  .span5  { width: @span1_width * 5 + @span1_margin * 4; }
+  .span6  { width: @span1_width * 6 + @span1_margin * 5; }
+  .span7  { width: @span1_width * 7 + @span1_margin * 6; }
+  .span8  { width: @span1_width * 8 + @span1_margin * 7; }
+  .span9  { width: @span1_width * 9 + @span1_margin * 8; }
+  .span10 { width: @span1_width * 10 + @span1_margin * 9; }
+  .span11 { width: @span1_width * 11 + @span1_margin * 10; }
+  .span12 { width: @span1_width * 12 + @span1_margin * 11; }
 }
 .row-ie(@span1_width: 6.903332%, @span1_margin: 1.43%) {
 
-	.row {
-		clear: both;
-	}
-	.span1, .span2, .span3, .span4, .span5, .span6, .span7, .span8, .span9, .span10, .span11, .span12 {
-		float: left;
-		//margin: 0 @span1_margin 0 0;
-	}
+  .row {
+    clear: both;
+  }
+  .span1, .span2, .span3, .span4, .span5, .span6, .span7, .span8, .span9, .span10, .span11, .span12 {
+    float: left;
+    //margin: 0 @span1_margin 0 0;
+  }
 
-	.span1  { width: @span1_width; }
-	.span2  { width: @span1_width * 2 + @span1_margin; }
-	.span3  { width: @span1_width * 3 + @span1_margin * 2; }
-	.span4  { width: @span1_width * 4 + @span1_margin * 3; }
-	.span5  { width: @span1_width * 5 + @span1_margin * 4; }
-	.span6  { width: @span1_width * 6 + @span1_margin * 5; }
-	.span7  { width: @span1_width * 7 + @span1_margin * 6; }
-	.span8  { width: @span1_width * 8 + @span1_margin * 7; }
-	.span9  { width: @span1_width * 9 + @span1_margin * 8; }
-	.span10 { width: @span1_width * 10 + @span1_margin * 9; }
-	.span11 { width: @span1_width * 11 + @span1_margin * 10; }
-	.span12 { width: @span1_width * 12 + @span1_margin * 11; }
+  .span1  { width: @span1_width; }
+  .span2  { width: @span1_width * 2 + @span1_margin; }
+  .span3  { width: @span1_width * 3 + @span1_margin * 2; }
+  .span4  { width: @span1_width * 4 + @span1_margin * 3; }
+  .span5  { width: @span1_width * 5 + @span1_margin * 4; }
+  .span6  { width: @span1_width * 6 + @span1_margin * 5; }
+  .span7  { width: @span1_width * 7 + @span1_margin * 6; }
+  .span8  { width: @span1_width * 8 + @span1_margin * 7; }
+  .span9  { width: @span1_width * 9 + @span1_margin * 8; }
+  .span10 { width: @span1_width * 10 + @span1_margin * 9; }
+  .span11 { width: @span1_width * 11 + @span1_margin * 10; }
+  .span12 { width: @span1_width * 12 + @span1_margin * 11; }
+}
+.row { .row(); }
+
+// Mobile
+@media (max-width: 730px) {
+.row_mobile(@span1_width: 7.0225%, @span1_margin: 1.43%) {
+
+  .span1, .span2, .span3, .span4, .span5, .span6, .span7, .span8, .span9, .span10, .span11, .span12 {
+    float: none;
+    width: 100%;
+    margin: 0;
+  }
+}
+body .row { .row_mobile(); }
 }
