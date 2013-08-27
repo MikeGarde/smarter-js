@@ -1,7 +1,7 @@
-@import "1_variables.less";
-@import "2_elements.less";
-@import "3_reset.less";
-@import "4_wordpress.less";
+@import "01_variables.less";
+@import "02_elements.less";
+@import "03_reset.less";
+@import "04_wordpress.less";
 
 body {
 	.font-sans();
@@ -15,7 +15,6 @@ h1, h2 {
 	margin-bottom: @textMargin * 1.3;
 }
 h3, h4 {
-	.font-serif_2();
 	//color: @brown_text;
 	margin-bottom: @textMargin * 1.3;
 }
@@ -118,13 +117,13 @@ form {
 
 
 // Desktop Only
-@media (min-width: 1000px) { @import "desktop.less"; }
+@media (min-width: 1000px) { @import "90_desktop.less"; }
 
 // Tablets
-@media (min-width: 731px) and (max-width: 999px) { @import "tablet.less"; }
+@media (min-width: 731px) and (max-width: 999px) { @import "91_tablet.less"; }
 
 // Phones (portrait & landscape)
-@media (max-width: 730px) { @import "mobile.less"; }
+@media (max-width: 730px) { @import "92_mobile.less"; }
 
 // Phone - Landscape
 //@media (min-width: 381px) and (max-width: 730px) { @import "phones-landscape.less"; }
