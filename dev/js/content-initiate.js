@@ -20,7 +20,7 @@ function getFileType(itemSrc){
 		return 'youtube';
 	}else if(itemSrc.match(/vimeo\.com/i)){
 		return 'vimeo';
-	}else if(itemSrc.match(/\b.mov\b/i)){
+	}else if(itemSrc.match(/\b.(mov|m4v)\b/i)){
 		return 'quicktime';
 	}else if(itemSrc.match(/\b.swf\b/i)){
 		return 'flash';
@@ -297,6 +297,8 @@ function popup(element, data){
 
 		case'quicktime':
 
+			var link = src;
+
 			break;
 		case'flash':
 
@@ -339,6 +341,11 @@ function popup(element, data){
 			var content = '<iframe src="'+ link +'" width="'+ width +'" height="'+ height +'" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
 
 		break;
+		case'quicktime':
+
+			var content = '<embed src="'+ link +'" width="'+ width +'" height="'+ height +'" autoplay="true" controller="true" loop="false" pluginspage="http://www.apple.com/quicktime/" />'
+
+			break;
 		case'image':
 
 			var content = '<img src="'+ src +'" width="'+ width +'" height="'+ height +'" />';
