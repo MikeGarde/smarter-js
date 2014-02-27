@@ -1,5 +1,14 @@
 <?php
 
+if (__FILE__ == $_SERVER['SCRIPT_FILENAME']) {
+    phpinfo();
+}
+if(@$_GET['debug'] == 'true'){
+	ini_set('display_errors',1);
+	ini_set('display_startup_errors',1);
+	error_reporting(-1);
+}
+
 /**
  * Like print_r() but so much better! Removes HTML formatting from an array while using Google Prittify.
  *
