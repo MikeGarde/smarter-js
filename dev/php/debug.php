@@ -21,6 +21,7 @@ if(@$_GET['debug'] == 'true'){
  * @return string  $string  A view of an array but formatted for easy reading via HTML.
  */
 function print_a($array=false, $die=true, $return=false) {
+	global $print_a_run;
 
 	if(!$return)
 		$return = 0;
@@ -68,28 +69,36 @@ function print_a($array=false, $die=true, $return=false) {
 	$result = str_replace(array('    ', "\t"), '&nbsp;&nbsp;&nbsp;&nbsp;', $result);
 
 	if(!$return) {
-		$string = '<script src="//google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>'.
-				  '<script src="//google-code-prettify.googlecode.com/svn/trunk/src/lang-css.js"></script>'.
-				  '<link rel="stylesheet" type="text/css" href="//google-code-prettify.googlecode.com/svn/trunk/src/prettify.css">'.
-				  '<link href="//fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet" type="text/css">'.
-				  '<style>'.
-				  'pre { background-color: #fff; font-family: \'Ubuntu Mono\', sans-serif; }'.
-				  'li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 { list-style-type: decimal; }'.
-				  'ol { padding: 0 0 0 45px; }'.
-				  'details, details summary { display: inline-block; }'.
-				  'details[open] summary span { display: none; }'.
-				  '</style>'.
-				  '<pre class="prettyprint linenums">'. $result .'</pre>'.
-				  '<script>prettyPrint();</script>';
+		if(!$print_a_run)
+			$string = '<script src="//google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>'.
+					  '<script src="//google-code-prettify.googlecode.com/svn/trunk/src/lang-css.js"></script>'.
+					  '<link rel="stylesheet" type="text/css" href="//google-code-prettify.googlecode.com/svn/trunk/src/prettify.css">'.
+					  '<link href="//fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet" type="text/css">'.
+					  '<style>'.
+					  'pre { background-color: #fff; font-family: \'Ubuntu Mono\', sans-serif; }'.
+					  'li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 { list-style-type: decimal; }'.
+					  'ol { padding: 0 0 0 45px; }'.
+					  'details, details summary { display: inline-block; }'.
+					  'details[open] summary span { display: none; }'.
+					  '</style>';
+			$string .='<pre class="prettyprint linenums">'. $result .'</pre>';
+
+		if(!$print_a_run)
+			$print_a_run = true;
+
 		echo $string;
 
-		if ($die) die();
+		if ($die) exit();
 
 	} else {
 		return $result;
 	}
 
 }
+function print_a_die() {
+    echo '<script>prettyPrint();</script>';
+}
+register_shutdown_function('print_a_die');
 
 
 /**
